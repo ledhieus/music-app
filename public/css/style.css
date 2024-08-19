@@ -106,6 +106,54 @@
 }
 
 /* song item  */
+.singer-detail .inner-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #F57F20;
+}
+.singer-detail .inner-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.singer-detail .inner-actions .inner-action {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    color: #646464;
+}
+.singer-detail .inner-actions .inner-action i{
+    font-size: 16px;
+    margin-right: 5px;
+}
+.singer-detail .inner-actions .inner-like {
+    cursor: pointer;
+}
+.singer-detail .inner-actions .inner-like i{
+    color: #0059ff;
+}
+.singer-detail .inner-actions .inner-like.active {
+    color: #0059ff;
+}
+.singer-detail .inner-actions .inner-like i.active {
+    font-weight: 900;
+}
+.singer-detail .inner-actions .inner-heart{
+    cursor: pointer;
+}
+.singer-detail .inner-actions .inner-heart i{
+    color: #b90000
+}
+.singer-detail .inner-play {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
 .singer-detail .inner-play .inner-audio{
     flex: 1;
 }
@@ -120,6 +168,7 @@
     animation-duration: 12s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    animation-play-state: paused;
 }
 @keyframes spin {
     from {
