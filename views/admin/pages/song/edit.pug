@@ -4,7 +4,7 @@ block main
     h1(class="mb-4") #{pageTitle}
 
     form(
-        action=`/${prefixAdmin}/songs/create`
+        action=`/${prefixAdmin}/songs/edit/${songs.id}?_method=PATCH`
         method="POST"
         enctype="multipart/form-data"
     )
@@ -16,6 +16,7 @@ block main
                 id="title"
                 name="title"
                 required
+                value = songs.title
                 )
         div(class="form-group")
             label(for="topic") chủ đề
@@ -27,8 +28,11 @@ block main
             )
                 option(value="" disabled selected) -- Chọn chủ đề --
                 each item in topics
-                    option(value=item.id) #{item.title}
-
+                    option(
+                        value=item.id
+                        selected=(item.id == songs.topicId ? true : false)
+                    ) #{item.title}
+                    
         div(class="form-group")
             label(for="singer") Ca sĩ
             select(
@@ -39,7 +43,10 @@ block main
             )
                 option(value="" disabled selected) -- Chọn ca sĩ --
                 each item in singers
-                    option(value=item.id) #{item.fullName}
+                    option(
+                        value=item.id
+                        selected=(item.id == songs.singerId ? true : false)
+                    ) #{item.fullName}
 
         div(
             class="form-group"
@@ -55,7 +62,7 @@ block main
                 upload-image-input
             )
             img(
-                src=""
+                src= songs.avatar
                 upload-image-preview
                 class="image-preview"
             )
@@ -73,7 +80,7 @@ block main
                 upload-audio-input
             )
             audio(controls upload-audio-play)
-                source(src="")
+                source(src=songs.audio)
         div(class="form-group")
             label(for="lyrics") Lời bài hát 
             textarea(
@@ -81,7 +88,7 @@ block main
                 id="lyrics"
                 name="lyrics"
                 rows= "20"
-            ) 
+            ) #{songs.lyrics}
 
         div(class="form-group")
             label(for="desc") Mô tả
@@ -90,7 +97,7 @@ block main
                 id="desc"
                 name="description"
                 rows="5"
-                )
+                ) #{songs.description}
         div(class="form-group form-check form-check-inline")
             input(
                 type="radio"
@@ -98,7 +105,7 @@ block main
                 id="statusActive"
                 name="status"
                 value="active"
-                checked
+                checked=(songs.status == "active" ? true : false)
                 )
             label(for="statusActive" class="form-check-label") Hoạt động
         div(class="form-group form-check form-check-inline")
@@ -108,10 +115,11 @@ block main
                 id="statusInActive"
                 name="status"
                 value="inactive"
+                checked=(songs.status == "inactive" ? true : false)
                 )
             label(for="statusInActive" class="form-check-label") Dừng hoạt động
         div(class="form-group")
             button(
                 type="submit"
                 class="btn btn-primary"
-            ) Tạo mới
+            ) Chỉnh sửa
